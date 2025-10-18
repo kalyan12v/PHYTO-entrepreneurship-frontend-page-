@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing - Phyto Shield</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <button
+      id="open-sidebar-button"
+      onclick="openSidebar()"
+      aria-label="open sidebar"
+      aria-expanded="false"
+      aria-controls="navbar"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="40px"
+        viewBox="0 -960 960 960"
+        width="40px"
+        fill="#c9c9c9"
+      >
+        <path
+          d="M165.13-254.62q-10.68 0-17.9-7.26-7.23-7.26-7.23-18t7.23-17.86q7.22-7.13 17.9-7.13h629.74q10.68 0 17.9 7.26 7.23 7.26 7.23 18t-7.23 17.87q-7.22 7.12-17.9 7.12H165.13Zm0-200.25q-10.68 0-17.9-7.27-7.23-7.26-7.23-17.99 0-10.74 7.23-17.87 7.22-7.13 17.9-7.13h629.74q10.68 0 17.9 7.27 7.23 7.26 7.23 17.99 0 10.74-7.23 17.87-7.22 7.13-17.9 7.13H165.13Zm0-200.26q-10.68 0-17.9-7.26-7.23-7.26-7.23-18t7.23-17.87q7.22-7.12 17.9-7.12h629.74q10.68 0 17.9 7.26 7.23 7.26 7.23 18t-7.23 17.86q-7.22 7.13-17.9 7.13H165.13Z"
+        />
+      </svg>
+    </button>
+
+    <nav id="navbar">
+      <ul>
+        <li>
+          <button
+            id="close-sidebar-button"
+            onclick="closeSidebar()"
+            aria-label="close sidebar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="40px"
+              viewBox="0 -960 960 960"
+              width="40px"
+              fill="#c9c9c9"
+            >
+              <path
+                d="m480-444.62-209.69 209.7q-7.23 7.23-17.5 7.42-10.27.19-17.89-7.42-7.61-7.62-7.61-17.7 0-10.07 7.61-17.69L444.62-480l-209.7-209.69q-7.23-7.23-7.42-17.5-.19-10.27 7.42-17.89 7.62-7.61 17.7-7.61 10.07 0 17.69 7.61L480-515.38l209.69-209.7q7.23-7.23 17.5-7.42 10.27-.19 17.89 7.42 7.61 7.62 7.61 17.7 0 10.07-7.61 17.69L515.38-480l209.7 209.69q7.23 7.23 7.42 17.5.19 10.27-7.42 17.89-7.62 7.61-17.7 7.61-10.07 0-17.69-7.61L480-444.62Z"
+              />
+            </svg>
+          </button>
+        </li>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('features') }}">Features</a></li>
+        <li><a href="{{ url_for('pricing') }}">Pricing</a></li>
+        {% if session.logged_in %}
+        <li><a href="{{ url_for('logout') }}">Logout ({{ session.username }})</a></li>
+        {% else %}
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes-container">
+            {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main id="main-content">
+      <section class="pricing-header">
+        <h1>Phyto Shield Membership Pricing</h1>
+        <p>Choose the plan that best fits your agricultural needs.</p>
+      </section>
+
+      <section class="benefits">
+        <h2>Why Choose PhytoShield?</h2>
+        <ul class="benefits-list">
+          <li>Accurate Plant Disease Detection</li>
+          <li>Expert Recommendations for Disease Control</li>
+          <li>AI-Powered Insights for Crop Health</li>
+          <li>Affordable and Flexible Membership Plans</li>
+        </ul>
+      </section>
+
+      <section class="pricing-plans">
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>1-Day Membership</h3>
+            <div class="price">₹50</div>
+            <a href="#" class="pricing-button">Buy Now</a>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Weekly Membership</h3>
+            <div class="price">₹400</div>
+            <a href="#" class="pricing-button">Buy Now</a>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Monthly Membership</h3>
+            <div class="price">₹1000</div>
+            <a href="#" class="pricing-button">Buy Now</a>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Yearly Membership</h3>
+            <div class="price">₹8000</div>
+            <a href="#" class="pricing-button">Buy Now</a>
+          </div>
+
+          <div class="pricing-card">
+            <h3>Lifetime Membership</h3>
+            <div class="price">₹15000</div>
+            <a href="#" class="pricing-button">Buy Now</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

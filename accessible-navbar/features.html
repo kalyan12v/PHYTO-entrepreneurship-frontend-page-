@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phyto Shield - Features</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <button
+      id="open-sidebar-button"
+      onclick="openSidebar()"
+      aria-label="open sidebar"
+      aria-expanded="false"
+      aria-controls="navbar"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="40px"
+        viewBox="0 -960 960 960"
+        width="40px"
+        fill="#c9c9c9"
+      >
+        <path
+          d="M165.13-254.62q-10.68 0-17.9-7.26-7.23-7.26-7.23-18t7.23-17.86q7.22-7.13 17.9-7.13h629.74q10.68 0 17.9 7.26 7.23 7.26 7.23 18t-7.23 17.87q-7.22 7.12-17.9 7.12H165.13Zm0-200.25q-10.68 0-17.9-7.27-7.23-7.26-7.23-17.99 0-10.74 7.23-17.87 7.22-7.13 17.9-7.13h629.74q10.68 0 17.9 7.27 7.23 7.26 7.23 17.99 0 10.74-7.23 17.87-7.22 7.13-17.9 7.13H165.13Zm0-200.26q-10.68 0-17.9-7.26-7.23-7.26-7.23-18t7.23-17.87q7.22-7.12 17.9-7.12h629.74q10.68 0 17.9 7.26 7.23 7.26 7.23 18t-7.23 17.86q-7.22 7.13-17.9 7.13H165.13Z"
+        />
+      </svg>
+    </button>
+
+    <nav id="navbar">
+      <ul>
+        <li>
+          <button
+            id="close-sidebar-button"
+            onclick="closeSidebar()"
+            aria-label="close sidebar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="40px"
+              viewBox="0 -960 960 960"
+              width="40px"
+              fill="#c9c9c9"
+            >
+              <path
+                d="m480-444.62-209.69 209.7q-7.23 7.23-17.5 7.42-10.27.19-17.89-7.42-7.61-7.62-7.61-17.7 0-10.07 7.61-17.69L444.62-480l-209.7-209.69q-7.23-7.23-7.42-17.5-.19-10.27 7.42-17.89 7.62-7.61 17.7-7.61 10.07 0 17.69 7.61L480-515.38l209.69-209.7q7.23-7.23 17.5-7.42 10.27-.19 17.89 7.42 7.61 7.62 7.61 17.7 0 10.07-7.61 17.69L515.38-480l209.7 209.69q7.23 7.23 7.42 17.5.19 10.27-7.42 17.89-7.62 7.61-17.7 7.61-10.07 0-17.69-7.61L480-444.62Z"
+              />
+            </svg>
+          </button>
+        </li>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('features') }}">Features</a></li>
+        <li><a href="{{ url_for('pricing') }}">Pricing</a></li>
+        {% if session.logged_in %}
+        <li><a href="{{ url_for('logout') }}">Logout ({{ session.username }})</a></li>
+        {% else %}
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes-container">
+            {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main id="main-content">
+      <section class="main-features">
+        <h1>Phyto Shield - Key Features</h1>
+        <p>
+          Phyto Shield provides cutting-edge features powered by AI to ensure the
+          best protection and management for your crops.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>Instant Disease Detection</h3>
+            <p>
+              Upload a picture of a diseased plant part and get instant, accurate
+              identification of the pathogen.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Expert Treatment Recommendations</h3>
+            <p>
+              Receive customized, science-backed advice on how to treat the
+              identified disease, including chemical and organic solutions.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Proactive Health Monitoring</h3>
+            <p>
+              Use our platform to monitor the health history of your crops and
+              predict potential outbreaks before they become severe.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Vast Knowledge Base</h3>
+            <p>
+              Access a comprehensive library of plant diseases, symptoms, and
+              prevention methods.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="target-users">
+        <h2>Who is Phyto Shield for?</h2>
+        <ul class="users-list">
+          <li>
+            <strong>Farmers & Growers</strong> – Improve crop health and prevent losses by
+            identifying diseases early.
+          </li>
+          <li>
+            <strong>Students</strong> – Gain hands-on experience with AI-powered
+            plant disease detection for academic projects.
+          </li>
+          <li>
+            <strong>Biotechnology Researchers</strong> – Utilize a powerful tool
+            for disease analysis and research advancements.
+          </li>
+        </ul>
+      </section>
+
+      <section class="why-choose">
+        <h2>Why Choose Phyto Shield?</h2>
+        <ul class="advantages-list">
+          <li>AI-driven accuracy for better disease identification</li>
+          <li>Vast image-based training dataset for reliable predictions</li>
+          <li>User-friendly interface for seamless operation</li>
+          <li>
+            Actionable disease management suggestions for effective treatment
+          </li>
+        </ul>
+      </section>
+
+      <section class="cta-section">
+        <h2>Get Started with Phyto Shield Today!</h2>
+        <p>
+          Empower yourself with the latest in AI-powered plant disease
+          detection. Take the next step in smart agriculture and research with
+          Phyto Shield.
+        </p>
+        <div class="cta-button-container">
+          <a href="{{ url_for('pricing') }}" class="cta-button"
+            >Contact us now to learn more!</a
+          >
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
